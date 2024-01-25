@@ -1,4 +1,4 @@
-package com.thainaraonofre.demoparkapi.config.entity;
+package com.thainaraonofre.demoparkapi.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
