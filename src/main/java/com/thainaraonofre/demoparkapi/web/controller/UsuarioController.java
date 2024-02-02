@@ -35,6 +35,11 @@ public class UsuarioController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Usuario>> getll() {
+        List <Usuario> users = usuarioService.buscarTodos();
+        return ResponseEntity.ok(users);
+    }
 
 
 
