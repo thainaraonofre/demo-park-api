@@ -2,6 +2,7 @@ package com.thainaraonofre.demoparkapi.service;
 
 
 import com.thainaraonofre.demoparkapi.entity.Usuario;
+import com.thainaraonofre.demoparkapi.exception.EntityNotFoundException;
 import com.thainaraonofre.demoparkapi.exception.UsernameUniqueViolationException;
 import com.thainaraonofre.demoparkapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,7 @@ public class UsuarioService {
     @Transactional(readOnly = true)
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Usuário não encontrado.")
-        );
+                () -> new EntityNotFoundException(String.format("Usuário id=%s não encontrado.", id)));
     }
 
     @Transactional
