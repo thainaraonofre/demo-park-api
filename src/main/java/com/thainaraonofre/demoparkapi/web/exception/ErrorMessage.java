@@ -29,7 +29,7 @@ public class ErrorMessage {
 
     public ErrorMessage(HttpServletRequest request, HttpStatus status, String message) {
         this.path = request.getRequestURI();
-        this.message = request.getMethod();
+        this.method = request.getMethod();
         this.status = status.value();
         this.statusText = status.getReasonPhrase();
         this.message = message;
@@ -37,7 +37,7 @@ public class ErrorMessage {
 
     public ErrorMessage(HttpServletRequest request, HttpStatus status, String message, BindingResult result) {
         this.path = request.getRequestURI();
-        this.message = request.getMethod();
+        this.method = request.getMethod();
         this.status = status.value();
         this.statusText = status.getReasonPhrase();
         this.message = message;
