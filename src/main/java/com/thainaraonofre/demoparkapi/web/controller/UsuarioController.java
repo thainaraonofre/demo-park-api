@@ -80,6 +80,14 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @Operation(summary = "Lista com todos os usuarios", description = "Lista com todos os usuarios",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Lista cadastrada com todos os usuarios",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioResponseDTO.class)))
+            }
+
+    )
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> getll() {
         List <Usuario> users = usuarioService.buscarTodos();
