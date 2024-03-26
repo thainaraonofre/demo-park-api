@@ -3,6 +3,7 @@ package com.thainaraonofre.demoparkapi.service;
 
 import com.thainaraonofre.demoparkapi.entity.Usuario;
 import com.thainaraonofre.demoparkapi.exception.EntityNotFoundException;
+import com.thainaraonofre.demoparkapi.exception.PasswordInvalidException;
 import com.thainaraonofre.demoparkapi.exception.UsernameUniqueViolationException;
 import com.thainaraonofre.demoparkapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class UsuarioService {
     @Transactional
     public Usuario editarSenha(Long id, String senhaAtual, String novaSenha, String confirmaSenha) {
         if (!novaSenha.equals(confirmaSenha)) {
-            throw new RuntimeException ("Nova senha não confere com confirmação de senha.");
+            throw new PasswordInvalidException("Nova senha não confere com confirmação de senha.");
         }
 
         Usuario user = buscarPorId(id);
