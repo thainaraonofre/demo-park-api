@@ -26,7 +26,7 @@ public class UsuarioIT {
             .post()
             .uri("/api/v1/usuarios")
             .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(new UsuarioCreateDTO("tody@hotmail.com", "123456"))
+            .bodyValue(new UsuarioCreateDTO("thai@gmail.com", "123456"))
             .exchange()
             .expectStatus().isCreated()
             .expectBody(UsuarioResponseDTO.class)
@@ -34,10 +34,9 @@ public class UsuarioIT {
 
     org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
     org.assertj.core.api.Assertions.assertThat(responseBody.getId()).isNotNull();
-    org.assertj.core.api.Assertions.assertThat(responseBody.getUsername()).isEqualTo("tody@hotmail.com");
+    org.assertj.core.api.Assertions.assertThat(responseBody.getUsername()).isEqualTo("thai@gmail.com");
     org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("CLIENTE");
 }
-
 
 
     @Test
@@ -124,6 +123,39 @@ public class UsuarioIT {
 
         org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
         org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(422);
+
+    }
+
+
+    @Test
+    public void buscarUsuario_ComIdExistente_RetornarUsuarioCriadoComStatus200(){
+        UsuarioResponseDTO responseBody = testClient
+                .get()
+                .uri("/api/v1/usuarios/100")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(UsuarioResponseDTO.class)
+                .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getId()).isEqualTo(100);
+        org.assertj.core.api.Assertions.assertThat(responseBody.getUsername()).isEqualTo("ana@gmail.com");
+        org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("ADMIN");
+    }
+
+
+    @Test
+    public void buscarUsuario_ComIdInexistente_RetornarErrorMessageComStatus200(){
+        ErrorMessage responseBody = testClient
+                .get()
+                .uri("/api/v1/usuarios/0")
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody(ErrorMessage.class)
+                .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(404);
 
     }
 
