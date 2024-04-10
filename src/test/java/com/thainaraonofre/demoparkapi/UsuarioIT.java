@@ -143,7 +143,6 @@ public class UsuarioIT {
         org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("ADMIN");
     }
 
-
     @Test
     public void buscarUsuario_ComIdInexistente_RetornarErrorMessageComStatus200(){
         ErrorMessage responseBody = testClient
