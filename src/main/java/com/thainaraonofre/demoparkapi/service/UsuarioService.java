@@ -38,17 +38,19 @@ public class UsuarioService {
     @Transactional
     public Usuario editarSenha(Long id, String senhaAtual, String novaSenha, String confirmaSenha) {
         if (!novaSenha.equals(confirmaSenha)) {
-            throw new PasswordInvalidException("Nova senha não confere com confirmação de senha.");
+            throw new PasswordInvalidException("A nova senha não confere com a confirmação de senha.");
         }
 
         Usuario user = buscarPorId(id);
 
-        if (!user.getPassword().equals(senhaAtual)){
-            throw new RuntimeException ("Sua senha não confere.");
+        if (!user.getPassword().equals(senhaAtual)) {
+            throw new PasswordInvalidException("A senha atual não corresponde à senha armazenada.");
         }
+
         user.setPassword(novaSenha);
-        return user;
+        return usuarioRepository.save(user);
     }
+
 
     @Transactional(readOnly = true)
     public List<Usuario> buscarTodos() {
