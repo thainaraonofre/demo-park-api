@@ -14,6 +14,7 @@
 	<name>demo-park-api</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
@@ -51,7 +52,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId> <!-- ou jjwt-gson se preferir usar Gson -->
+			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
