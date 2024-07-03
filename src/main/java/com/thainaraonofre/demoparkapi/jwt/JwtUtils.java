@@ -18,7 +18,7 @@ public class JwtUtils {
 
 
     public static final String JWT_BEARER = "Bearer ";
-    public static final String JWT_AUTHORIZATION = "Athorization";
+    public static final String JWT_AUTHORIZATION = "Authorization";
     public static final String SECRET_KEY = "0123456789-0123456789-0123456789";
     public static final long EXPIRE_DAYS = 0;
     public static final long EXPIRE_HOURS = 0;
@@ -80,7 +80,7 @@ public class JwtUtils {
         return false;
     }
 
-    private String refactorToken(String token) {
+    public static String refactorToken(String token) {
         if (token.contains(JWT_BEARER)) {
             return token.substring(JWT_BEARER.length());
         }
